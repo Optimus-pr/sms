@@ -76,20 +76,45 @@ router.post('/addstudent',async(req,res)=>{
 })
 
 router.get('/takeattendance',async(req,res)=>{
-    // const a = req.args.params
 
     const response=await Student.find({});
-    console.log(response);
+    //console.log(response);
      res.json(response)
 })
 
 
 router.get('/showstudent/:id',async(req,res)=>{
     const id=req.params.id
-    console.log(id)
+   // console.log(id)
     response=await Student.findOne({USN:id});
-    console.log(response)
+    //console.log(response)
     res.json(response)
+})
+
+router.post('/incrattendance',async(req,res)=>{
+    
+    console.log(req.body.rno)
+    try{
+        response=await Student.updateOne({rno:req.body.rno},{$inc:{attendance:1}});
+        
+       // console.log(response)
+        res.json(response)
+    }
+    catch(err){
+        console.log(err)
+    }
+
+//    const rno=req.body.rno;
+//    Student.findOne({rno}).then(std=>{
+//     const atd=Number(std.attendance)+1
+//    return std.updateOne({rno:rno},{$set:{attendance:atd}})
+//    }).then((data)=>{
+//          console.log(data)
+//         return data
+//    }).catch(err=>{
+//     console.log(err)
+//    })
+    
 })
 
 
