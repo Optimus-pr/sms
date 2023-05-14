@@ -15,6 +15,7 @@ import Student from './screens/Student';
 import Admin from './screens/Admin';
 import AddStudent from './screens/AddStudent';
 import TakeAttendance from './screens/TakeAttendance';
+import AddSheet from './screens/AddSheet';
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
         {/* <Route exact path='/admin' element={<Admin/>}></Route> */}
         <Route exact path='/addstudent' element={<AddStudent/>}></Route>
         <Route exact path='/takeattendance' element={<TakeAttendance/>}></Route>
+        <Route exact path='/addsheet' element={<AddSheet/>}></Route>
 
       </Routes>
       

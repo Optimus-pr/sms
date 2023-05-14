@@ -21,7 +21,7 @@ const UserSchema=new Schema({
     // }
     attendance:{
         type:Number,
-        default:1
+        default:0
     }
 })
 

@@ -74,7 +74,6 @@ const onChange=(event)=>{
 
                   <div className="d-flex  mx-4 mb-3 mb-lg-4">
                     <button type="submit" className="btn btn-primary btn-lg">Add Student</button>
-                    <Link to='/login' className="btn btn-primary btn-lg mx-3">Already a User</Link>
                   </div>
 
                 </form>

@@ -10,25 +10,27 @@ import {
 export default function TakeAttendance() {
     const [students, setStudents] = useState([])
 
-    useEffect(() => {
-        const response = async function () {
-            const res = await axios.get('http://localhost:4000/api/takeattendance')
-            console.log(res.data)
-            setStudents(res.data)
-        }
-        response()
-    }, [])
-
     const incr=async function(rno){
-        console.log(rno)
+        //console.log(rno)
         const response=await axios.post('http://localhost:4000/api/incrattendance',{rno:rno})
         // console.log(response)
     }
 
     const decr=async function(rno){
-        console.log(rno)
+      //  console.log(rno)
         const response=await axios.post('http://localhost:4000/api/decrattendance',{rno:rno})
     }
+
+    useEffect(() => {
+        const response = async function () {
+            const res = await axios.get('http://localhost:4000/api/takeattendance')
+           // console.log(res.data)
+            setStudents(res.data)
+        }
+        response()
+    }, [incr,decr])
+
+   
 
 
     return (

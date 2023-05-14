@@ -8,6 +8,8 @@ export default function Teacher() {
             <Link to='/addstudent' className="btn btn-primary btn-lg mx-3">Add Student</Link>
             <Link to='/takeattendance' className="btn btn-primary btn-lg mx-3">Take Attendance</Link>
             <Link to='/login' className="btn btn-primary btn-lg mx-3">Update Marks</Link>
+            <Link to='/addsheet' className="btn btn-primary btn-lg mx-3">Add Sheet</Link>
+
         </div>
     </>
     
