@@ -3,23 +3,55 @@ import {Link,useNavigate} from 'react-router-dom'
 
 export default function Signup() {
   const [credentials,setcredentials]=useState({name:"",email:"",password:"",USN:""})
+  const [userType,setuserType]=useState();
+  const [secretkey,setsecretkey]=useState("");
   const navigate=useNavigate()
   const handlesubmit=async(e)=>{
-    e.preventDefault();
-    const response=await fetch("http://localhost:4000/api/createuser",{
-        method:'POST',
-        headers:{
-            'Content-Type':'application/json'
-        },
-        body:JSON.stringify({name:credentials.name,email:credentials.email,password:credentials.password,USN:credentials.USN})
-    })
-    const json=await response.json()
-    console.log(json)
 
-    if(!json.success)
-        alert("Enter valid credentials") 
+    if(userType==="admin")
+    {
+      if(secretkey!=="chinmay")
+      {
+        e.preventDefault();
+        alert("You are not an admin")
+      }
+      else
+      {
+        e.preventDefault();
+        const response=await fetch("http://localhost:4000/api/createuser",{
+            method:'POST',
+            headers:{
+                'Content-Type':'application/json'
+            },
+            body:JSON.stringify({name:credentials.name,email:credentials.email,password:credentials.password,USN:credentials.USN,userType:userType})
+        })
+        const json=await response.json()
+        console.log(json)
+    
+        if(!json.success)
+            alert("Enter valid credentials") 
+        else
+            navigate('/teacher')
+      }
+    }
     else
-        navigate('/')
+    {
+      e.preventDefault();
+      const response=await fetch("http://localhost:4000/api/createuser",{
+          method:'POST',
+          headers:{
+              'Content-Type':'application/json'
+          },
+          body:JSON.stringify({name:credentials.name,email:credentials.email,password:credentials.password,USN:credentials.USN,userType:userType})
+      })
+      const json=await response.json()
+      console.log(json)
+  
+      if(!json.success)
+          alert("Enter valid credentials") 
+      else
+          navigate('/student')
+    }
 
 }
 
@@ -42,6 +74,18 @@ const onChange=(event)=>{
 
                 <form className="mx-1 mx-md-4" onSubmit={handlesubmit}>
 
+                
+
+                <div className="d-flex flex-row align-items-center mb-4">
+                    <i className="fas fa-user fa-lg me-3 fa-fw"></i>
+                    <div className="form-outline flex-fill mb-0">
+                    Register As
+                    <input type='radio' name='userType' value='user' onChange={(e)=>{setuserType(e.target.value)}} />Student
+                    <input type='radio' name='userType' value='admin' onChange={(e)=>{setuserType(e.target.value)}} />Teacher
+
+                    </div>
+                  </div>
+
                   <div className="d-flex flex-row align-items-center mb-4">
                     <i className="fas fa-user fa-lg me-3 fa-fw"></i>
                     <div className="form-outline flex-fill mb-0">
@@ -50,13 +94,20 @@ const onChange=(event)=>{
                     </div>
                   </div>
 
-                  <div className="d-flex flex-row align-items-center mb-4">
+                  {userType==="admin"?<div className="d-flex flex-row align-items-center mb-4">
+                    <i className="fas fa-user fa-lg me-3 fa-fw"></i>
+                    <div className="form-outline flex-fill mb-0">
+                      <input type="text" className="form-control" name='USN' value={credentials.USN} onChange={onChange}/>
+                      <label className="form-label" htmlFor="usn">Employee no</label>
+                    </div>
+                  </div>:<div className="d-flex flex-row align-items-center mb-4">
                     <i className="fas fa-user fa-lg me-3 fa-fw"></i>
                     <div className="form-outline flex-fill mb-0">
                       <input type="text" className="form-control" name='USN' value={credentials.USN} onChange={onChange}/>
                       <label className="form-label" htmlFor="usn">Your USN</label>
                     </div>
-                  </div>
+                  </div>}
+                  
 
                   <div className="d-flex flex-row align-items-center mb-4">
                     <i className="fas fa-envelope fa-lg me-3 fa-fw"></i>
@@ -73,6 +124,16 @@ const onChange=(event)=>{
                       <label className="form-label" htmlFor="password">Password</label>
                     </div>
                   </div>
+
+
+                  {userType==="admin"? <div className="d-flex flex-row align-items-center mb-4">
+                    <i className="fas fa-lock fa-lg me-3 fa-fw"></i>
+                    <div className="form-outline flex-fill mb-0">
+                      <input type="password" id="form3Example4c" className="form-control" name='secretkey' value={secretkey} onChange={(e)=>{setsecretkey(e.target.value)}}/>
+                      <label className="form-label" htmlFor="password">Secret key</label>
+                    </div>
+                  </div>:null}
+                 
 
                   {/* <div className="d-flex flex-row align-items-center mb-4">
                     <i className="fas fa-key fa-lg me-3 fa-fw"></i>

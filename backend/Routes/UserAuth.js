@@ -1,5 +1,5 @@
 const express=require('express')
-
+const Student=require('../Models/Student')
 const router=express.Router();
 const User=require('../Models/User')
 const {body,validationResult}=require('express-validator');
@@ -22,12 +22,8 @@ router.post('/createuser',[body('email','Please enter valid email').isEmail(),bo
            name:req.body.name,
            USN:req.body.USN,
            email:req.body.email,
-           password:secPass
-        // name:"chandan",
-        // email:"chandurgowda@gmail.com",
-        // password:"chandan",
-        // USN:"01JST20CS039"
-
+           password:secPass,
+           attendance:req.body.attendance
         })  
         res.json({success:true}) 
    } catch (error) {
@@ -56,12 +52,46 @@ router.post('/loginuser',async(req,res)=>{
         }
 
         const authToken=jwt.sign(data,jwtSecret);
-        return res.json({success:true,authToken:authToken})
+        return res.json({success:true,authToken:authToken,user:userdata.userType})
     } catch (error) {
         console.log(error);
         res.json({success:false})
     }
 })
+
+router.post('/addstudent',async(req,res)=>{
+
+    try {
+        await Student.create({
+           name:req.body.name,
+           USN:req.body.USN,
+           rno:req.body.rno,
+           attendance:req.body.attendance
+        })  
+        res.json({success:true}) 
+   } catch (error) {
+       console.log(error)
+       res.json({success:false})
+   }
+})
+
+router.get('/takeattendance',async(req,res)=>{
+    // const a = req.args.params
+
+    const response=await Student.find({});
+    console.log(response);
+     res.json(response)
+})
+
+
+router.get('/showstudent/:id',async(req,res)=>{
+    const id=req.params.id
+    console.log(id)
+    response=await Student.findOne({USN:id});
+    console.log(response)
+    res.json(response)
+})
+
 
 module.exports=router
 

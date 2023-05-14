@@ -1,6 +1,7 @@
 const express=require('express')
 const app=express()
 const mongoose=require('mongoose')
+const Student=require('./Models/Student')
 
 const dburi='mongodb+srv://chinmay:chinmay@cluster0.vbl1st6.mongodb.net/sms?retryWrites=true&w=majority'
 
@@ -22,9 +23,21 @@ app.use((req,res,next)=>{
     );
     next();
 })
+
 app.use(express.json())
 app.use('/api',require('./Routes/UserAuth'))
 
 app.get('/',(req,res)=>{
     res.send("Hello world")
 })
+
+app.get('/takeattendance', function(req, res) {
+    Student.find({}, function(err, data) {
+      if (err) {
+        console.log(err);
+        res.status(500).send('Internal Server Error');
+      } else {
+        res.send(data);
+      }
+    });
+  });
