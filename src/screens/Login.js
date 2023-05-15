@@ -28,20 +28,20 @@ export default function Login() {
         navigate("/teacher")
       }
       else {
-        try{
-        const res=await axios(`http://localhost:4000/api/showstudent/${credentials.USN}`)
-        console.log(res.data)
-        window.sessionStorage.setItem('USN',res.data.USN)
-        window.sessionStorage.setItem('name',res.data.name)
-        window.sessionStorage.setItem('rno',res.data.rno)
-        window.sessionStorage.setItem('attendance',res.data.attendance)
-        // localStorage.setItem('Token',res.data)
-        navigate("/student")
+        try {
+          const res = await axios(`http://localhost:4000/api/showstudent/${credentials.USN}`)
+          console.log(res.data)
+          window.sessionStorage.setItem('USN', res.data.USN)
+          window.sessionStorage.setItem('name', res.data.name)
+          window.sessionStorage.setItem('rno', res.data.rno)
+          window.sessionStorage.setItem('attendance', res.data.attendance)
+          // localStorage.setItem('Token',res.data)
+          navigate("/student")
         }
-        catch(err){
+        catch (err) {
           console.log(err)
         }
-        
+
       }
     }
   }
@@ -61,17 +61,10 @@ export default function Login() {
                   <div className="row justify-content-center">
                     <div className="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
 
-                      <p className="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4" style={{color:'white'}}>Login</p>
+                      <p className="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4" style={{ color: 'white' }}>Login</p>
 
                       <form className="mx-1 mx-md-4" onSubmit={handlesubmit}>
 
-                        {/* <div className="d-flex flex-row align-items-center mb-4">
-                    <i className="fas fa-user fa-lg me-3 fa-fw"></i>
-                    <div className="form-outline flex-fill mb-0">
-                      <input type="text" className="form-control" name='name' value={credentials.name} onChange={onChange}/>
-                      <label className="form-label" htmlFor="name">Your Name</label>
-                    </div>
-                  </div> */}
 
                         <div className="d-flex flex-row align-items-center mb-4">
                           <i className="fas fa-user fa-lg me-3 fa-fw"></i>
@@ -81,14 +74,6 @@ export default function Login() {
                           </div>
                         </div>
 
-                        {/* <div className="d-flex flex-row align-items-center mb-4">
-                    <i className="fas fa-envelope fa-lg me-3 fa-fw"></i>
-                    <div className="form-outline flex-fill mb-0">
-                      <input type="email" id="form3Example3c" className="form-control" name='email' value={credentials.email} onChange={onChange}/>
-                      <label className="form-label" htmlFor="email">Your Email</label>
-                    </div>
-                  </div> */}
-
                         <div className="d-flex flex-row align-items-center mb-4">
                           <i className="fas fa-lock fa-lg me-3 fa-fw"></i>
                           <div className="form-outline flex-fill mb-0">
@@ -96,21 +81,6 @@ export default function Login() {
                             <label className="form-label" htmlFor="password">Password</label>
                           </div>
                         </div>
-
-                        {/* <div className="d-flex flex-row align-items-center mb-4">
-                    <i className="fas fa-key fa-lg me-3 fa-fw"></i>
-                    <div className="form-outline flex-fill mb-0">
-                      <input type="password" id="form3Example4cd" className="form-control" />
-                      <label className="form-label" htmlFor="password">Repeat your password</label>
-                    </div>
-                  </div>
-
-                  <div className="form-check d-flex justify-content-center mb-5">
-                    <input className="form-check-input me-2" type="checkbox" value="" id="form2Example3c" />
-                    <label className="form-check-label" htmlFor="form2Example3">
-                      I agree all statements in <a href="#!">Terms of service</a>
-                    </label>
-                  </div> */}
 
                         <div className="d-flex  mx-4 mb-3 mb-lg-4">
                           <button type="submit" className="btn btn-primary btn-lg">Login</button>

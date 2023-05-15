@@ -38,6 +38,7 @@ router.post('/createuser',[body('email','Please enter valid email').isEmail(),bo
 router.post('/loginuser',async(req,res)=>{
     
    let USN=req.body.USN;
+   console.log(USN);
     try {
         let userdata=await User.findOne({USN});
         if(!userdata)
@@ -88,9 +89,9 @@ router.get('/takeattendance',async(req,res)=>{
 
 router.get('/showstudent/:id',async(req,res)=>{
     const id=req.params.id
-   // console.log(id)
+    console.log(id)
     response=await Student.findOne({USN:id});
-    //console.log(response)
+    console.log(response)
     res.json(response)
 })
 
