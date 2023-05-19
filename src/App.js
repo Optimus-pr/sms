@@ -17,15 +17,20 @@ import AddStudent from './screens/AddStudent';
 import TakeAttendance from './screens/TakeAttendance';
 import AddSheet from './screens/AddSheet';
 
+import Authchecker from './screens/Authchecker';
+
 function App() {
+ 
   return (
    <Router>
     <div>
       <Routes>
         <Route exact path='/' element={<Home/>}></Route>
-        <Route exact path='/login' element={<Login/>}></Route>
+       
         <Route exact path='/signup' element={<Signup/>}></Route>
-        <Route exact path='/teacher' element={<Teacher/>}></Route>
+        <Route exact path='/login' element={<Login/>}></Route>
+        <Route exact path='/teacher' element={<Authchecker/>}></Route>
+        
         <Route exact path='/student' element={<Student/>}></Route>
         {/* <Route exact path='/admin' element={<Admin/>}></Route> */}
         <Route exact path='/addstudent' element={<AddStudent/>}></Route>

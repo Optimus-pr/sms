@@ -27,7 +27,12 @@ const UserSchema=new Schema({
     {
         type:Date,
         default:Date.now
+    },
+    attendance:{
+        type:Number,
+        default:0
     }
+
 })
 
 module.exports=mongoose.model('user',UserSchema)

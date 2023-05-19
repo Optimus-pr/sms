@@ -11,6 +11,7 @@ const multer = require('multer');
 const xlsx = require('xlsx');
 
 
+
 router.post('/createuser',[body('email','Please enter valid email').isEmail(),body('password','min len of password is 5').isLength({min:5})],async(req,res)=>{
     const errors=validationResult(req);
     if(!errors.isEmpty()){
@@ -26,8 +27,11 @@ router.post('/createuser',[body('email','Please enter valid email').isEmail(),bo
            USN:req.body.USN,
            email:req.body.email,
            password:secPass,
-           attendance:req.body.attendance
-        })  
+           userType:req.body.userType,
+          
+        })
+        
+
         res.json({success:true}) 
    } catch (error) {
        console.log(error)
@@ -56,7 +60,7 @@ router.post('/loginuser',async(req,res)=>{
         }
 
         const authToken=jwt.sign(data,jwtSecret);
-        return res.json({success:true,authToken:authToken,user:userdata.userType})
+        return res.json({success:true,authToken:authToken,user:userdata.userType,USN:userdata.USN})
     } catch (error) {
         console.log(error);
         res.json({success:false})
@@ -70,7 +74,7 @@ router.post('/addstudent',async(req,res)=>{
            name:req.body.name,
            USN:req.body.USN,
            rno:req.body.rno,
-           attendance:req.body.attendance
+           
         })  
         res.json({success:true}) 
    } catch (error) {
@@ -99,7 +103,7 @@ router.post('/incrattendance',async(req,res)=>{
     
     console.log(req.body.rno)
     try{
-        response=await Student.updateOne({rno:req.body.rno},{$inc:{attendance:1}});
+        response=await Student.updateOne({rno:req.body.rno},{$inc:{attendance:req.body.hrs}});
         
        // console.log(response)
         res.json(response)
@@ -125,9 +129,24 @@ router.post('/decrattendance',async(req,res)=>{
     
     console.log(req.body.rno)
     try{
-        response=await Student.updateOne({rno:req.body.rno},{$inc:{attendance:-1}});
+        response=await Student.updateOne({rno:req.body.rno},{$inc:{attendance:-req.body.hrs}});
         
        // console.log(response)
+        res.json(response)
+    }
+    catch(err){
+        console.log(err)
+    }
+    
+})
+
+router.post('/doneattendance',async(req,res)=>{
+    
+    console.log(req.body.USN)
+    try{
+        response=await User.updateOne({USN:req.body.USN},{$inc:{attendance:req.body.hrs}});
+        
+        // console.log(response)
         res.json(response)
     }
     catch(err){

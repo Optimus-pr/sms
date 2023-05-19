@@ -24,7 +24,10 @@ export default function Login() {
     }
     else {
       localStorage.setItem("authToken", json.authToken)
+      localStorage.setItem("user",json.user)
+      localStorage.setItem("USN",json.USN)
       if (json.user === "admin") {
+        //login as user then try to go to /teacher it is navigating
         navigate("/teacher")
       }
       else {
