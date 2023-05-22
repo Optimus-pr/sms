@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 import { IconButton } from '@mui/material'
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
@@ -10,6 +11,7 @@ import {
 export default function TakeAttendance() {
     const [students, setStudents] = useState([])
     const [hrs, setHrs] = useState(0)
+    const navigate=useNavigate();
 
     const incr = async function (rno, hrs) {
         //console.log(rno)
@@ -47,6 +49,7 @@ export default function TakeAttendance() {
             alert("please fill the number of hours taken");
         else {
             const response = await axios.post('http://localhost:4000/api/doneattendance', { USN: localStorage.getItem("USN"), hrs: hrs })
+            const respons = await axios.post('http://localhost:4000/api/attendancestatus', { USN: localStorage.getItem("USN")})
         }
     }
 
@@ -102,7 +105,7 @@ export default function TakeAttendance() {
                 </Table>
 
             </TableContainer>
-            <div className="d-flex  mx-4 mb-3 mb-lg-4">
+            <div className="d-flex  mx-4 mb-3 mb-lg-4 justify-content-center align-items-center">
                 <button onClick={handleClick} className="btn btn-primary btn-lg">Done</button>
             </div>
 

@@ -7,6 +7,10 @@ export default function Navbar() {
     localStorage.removeItem("authToken")
     localStorage.removeItem("user")
     localStorage.removeItem("USN")
+    window.sessionStorage.removeItem("USN")
+    window.sessionStorage.removeItem("name")
+    window.sessionStorage.removeItem("status")
+    window.sessionStorage.removeItem("rno")
     navigate("/login")
  }
 

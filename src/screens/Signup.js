@@ -78,10 +78,10 @@ const onChange=(event)=>{
 
                 <div className="d-flex flex-row align-items-center mb-4">
                     <i className="fas fa-user fa-lg me-3 fa-fw"></i>
-                    <div className="form-outline flex-fill mb-0">
-                    Register As
-                    <input type='radio' name='userType' value='user' onChange={(e)=>{setuserType(e.target.value)}} />Student
-                    <input type='radio' name='userType' value='admin' onChange={(e)=>{setuserType(e.target.value)}} />Teacher
+                    <div className="form-outline flex-fill mb-0 ">
+                    Register As &nbsp;&nbsp;
+                    <input type='radio' name='userType' value='user'  onChange={(e)=>{setuserType(e.target.value)}} /> Student &nbsp;&nbsp;
+                    <input type='radio' name='userType' value='admin'  onChange={(e)=>{setuserType(e.target.value)}} /> Teacher &nbsp;&nbsp;
 
                     </div>
                   </div>

@@ -27,7 +27,7 @@ export default function Login() {
       localStorage.setItem("user",json.user)
       localStorage.setItem("USN",json.USN)
       if (json.user === "admin") {
-        //login as user then try to go to /teacher it is navigating
+        console.log("hello boii")
         navigate("/teacher")
       }
       else {
@@ -37,7 +37,7 @@ export default function Login() {
           window.sessionStorage.setItem('USN', res.data.USN)
           window.sessionStorage.setItem('name', res.data.name)
           window.sessionStorage.setItem('rno', res.data.rno)
-          window.sessionStorage.setItem('attendance', res.data.attendance)
+          window.sessionStorage.setItem('status', res.data.status)
           // localStorage.setItem('Token',res.data)
           navigate("/student")
         }

@@ -7,7 +7,7 @@ export default function Teacher() {
    
     <>
 
-      {(!localStorage.getItem("authToken")) ?navigate('/login'):null}
+      
        <div className="d-flex  mx-4 mb-3 mb-lg-4 " style={{"margin":"20px"}}>
 
             <Link to='/addstudent' className="btn btn-primary btn-lg mx-3">Add Student</Link>
