@@ -184,8 +184,10 @@ router.post('/attendancestatus',async(req,res)=>{
         });
     
         console.log('Attendance updated for all students');
+        res.json({done:true});
       } catch (error) {
         console.error('Error updating attendance:', error);
+        res.json({done:false})
       }
     
     

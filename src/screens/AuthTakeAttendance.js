@@ -1,9 +1,9 @@
 import {React,useState,useEffect} from 'react'
 import { useNavigate } from 'react-router-dom';
-import Teacher from './Teacher';
+import TakeAttendance from './TakeAttendance';
 import Login from './Login';
 
-export default function Authchecker() {
+export default function AuthTakeAttendance() {
     const navigate=useNavigate()
     const [authenticated, setAuthenticated] = useState(false);
     useEffect(() => {
@@ -19,9 +19,7 @@ export default function Authchecker() {
       }, [navigate]);
   return (
     <>
-     
-     {authenticated ? <Teacher/> : <Login/>}
-    </>
-   
+    {authenticated ? <TakeAttendance/> : <Login/>}
+   </>
   )
 }

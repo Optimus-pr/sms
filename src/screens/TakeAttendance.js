@@ -50,6 +50,9 @@ export default function TakeAttendance() {
         else {
             const response = await axios.post('http://localhost:4000/api/doneattendance', { USN: localStorage.getItem("USN"), hrs: hrs })
             const respons = await axios.post('http://localhost:4000/api/attendancestatus', { USN: localStorage.getItem("USN")})
+            console.log("hi chinmay")
+            alert("Attendance updation done")
+            navigate('/teacher')
         }
     }
 

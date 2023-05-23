@@ -50,7 +50,7 @@ export default function Signup() {
       if(!json.success)
           alert("Enter valid credentials") 
       else
-          navigate('/student')
+          navigate('/login')
     }
 
 }
