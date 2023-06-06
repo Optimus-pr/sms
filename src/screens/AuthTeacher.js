@@ -17,7 +17,7 @@ export default function AuthTeacher() {
         };
     
         checkAuth();
-      }, [navigate]);
+      }, [authenticated]);
   return (
     <>
      

@@ -16,7 +16,7 @@ export default function AuthStudent() {
         };
     
         checkAuth();
-      }, [navigate]);
+      }, [authenticated]);
   return (
     <>
      {authenticated ? <Student/> : <Login/>}

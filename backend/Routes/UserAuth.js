@@ -68,7 +68,6 @@ router.post('/loginuser',async(req,res)=>{
 })
 
 router.post('/addstudent',async(req,res)=>{
-
     try {
         await Student.create({
            name:req.body.name,
@@ -86,7 +85,7 @@ router.post('/addstudent',async(req,res)=>{
 router.get('/takeattendance',async(req,res)=>{
 
     const response=await Student.find().sort({rno:1});
-    //console.log(response);
+    // console.log(response);
      res.json(response)
 })
 
@@ -112,17 +111,6 @@ router.post('/incrattendance',async(req,res)=>{
         console.log(err)
     }
 
-//    const rno=req.body.rno;
-//    Student.findOne({rno}).then(std=>{
-//     const atd=Number(std.attendance)+1
-//    return std.updateOne({rno:rno},{$set:{attendance:atd}})
-//    }).then((data)=>{
-//          console.log(data)
-//         return data
-//    }).catch(err=>{
-//     console.log(err)
-//    })
-    
 })
 
 router.post('/decrattendance',async(req,res)=>{

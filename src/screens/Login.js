@@ -27,8 +27,11 @@ export default function Login() {
       localStorage.setItem("user",json.user)
       localStorage.setItem("USN",json.USN)
       if (json.user === "admin") {
+
         console.log("hello boii")
+
         navigate("/teacher")
+        window.location.reload();
       }
       else {
         try {
@@ -40,6 +43,7 @@ export default function Login() {
           window.sessionStorage.setItem('status', res.data.status)
           // localStorage.setItem('Token',res.data)
           navigate("/student")
+          window.location.reload();
         }
         catch (err) {
           console.log(err)
