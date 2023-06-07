@@ -89,6 +89,17 @@ router.get('/takeattendance',async(req,res)=>{
      res.json(response)
 })
 
+router.get('/takeusn',async(req,res)=>{
+
+  const response=await Student.find().sort({rno:1});
+  // console.log(response);
+  const arr=[];
+  response.map((obj)=>{
+    arr.push(obj.USN);
+  })
+   res.json(arr)
+})
+
 
 router.get('/showstudent/:id',async(req,res)=>{
     const id=req.params.id
@@ -100,7 +111,8 @@ router.get('/showstudent/:id',async(req,res)=>{
 
 router.post('/incrattendance',async(req,res)=>{
     
-    console.log(req.body.rno)
+    // console.log(req.body.rno)
+    arr=req.body.arr;
     try{
         response=await Student.updateOne({rno:req.body.rno},{$inc:{attendance:req.body.hrs}});
         
@@ -129,9 +141,21 @@ router.post('/decrattendance',async(req,res)=>{
 })
 
 router.post('/doneattendance',async(req,res)=>{
-    
+    console.log(req.body);
     console.log(req.body.USN)
+    let a=req.body.arr;
     try{
+      for (let i=0;i<a.length;i++) {
+        try {
+          
+          await Student.updateOne({ USN: a[i] }, { $inc:{attendance:req.body.hrs}});
+          console.log(`Roll number ${a[i]} incremented in the database.`);
+        } catch (error) {
+          console.error('Error occurred while incrementing roll number in the database:', error);
+        }
+        
+      }
+    
         console.log("done updating atd for user")
         response=await User.updateOne({USN:req.body.USN},{$inc:{attendance:req.body.hrs}});
         

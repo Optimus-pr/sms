@@ -15,9 +15,12 @@ import {
 
 export default function TakeAttendance() {
     const [students, setStudents] = useState([]);
-    const [std, setStd] = useState([]);
+   const [std, setStd] = useState([]);
     const [hrs, setHrs] = useState(0);
     const navigate = useNavigate();
+    // const std=[];
+
+
 
     // const incr = async function (rno, hrs) {
     //     if (hrs === 0) alert('Please fill in the number of hours taken.');
@@ -42,13 +45,18 @@ export default function TakeAttendance() {
     useEffect(() => {
         const fetchData = async function () {
             const res = await axios.get('http://localhost:4000/api/takeattendance');
+            const resp = await axios.get('http://localhost:4000/api/takeusn');
+
             setStudents(res.data);
-            setStd(res.data);
-            console.log(std);
-            console.log(students);
+            setStd(resp.data);
         };
+
         fetchData();
     }, []);
+
+    // students.map((obj)=>{
+    //     std.push(obj.USN);
+    // })
 
     const onChange = (event) => {
         setHrs(event.target.value);
@@ -73,18 +81,22 @@ export default function TakeAttendance() {
 
     const [checkedStudents, setCheckedStudents] = useState({});
 
-    const handleChange = (event, rno) => {
+    const handleChange = (event, USN, rno) => {
         setCheckedStudents((prevState) => ({
             ...prevState,
             [rno]: event.target.checked,
         }));
-        let index = std.indexOf(rno);
+        let array=std;
+        let index = array.indexOf(USN);
 
         // Check if the element exists in the array
         if (index > -1) {
             // Remove the element using splice()
-            std.splice(index, 1);
+            array.splice(index, 1);
         }
+        
+        setStd(array)
+        console.log(std);
     };
 
     return (
@@ -119,6 +131,7 @@ export default function TakeAttendance() {
                         </TableRow>
                     </TableHead>
                     <TableBody>
+                      
                         {students.map((std) => (
                             <TableRow
                                 key={std.rno}
@@ -131,7 +144,7 @@ export default function TakeAttendance() {
                                     {std.attendance}
                                     <Checkbox
                                         checked={checkedStudents[std.rno] || false}
-                                        onChange={(event) => handleChange(event, std.rno)}
+                                        onChange={(event) => handleChange(event, std.USN, std.rno)}
                                         inputProps={{ 'aria-label': 'controlled' }}
                                     />
                                 </TableCell>
